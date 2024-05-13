@@ -1,0 +1,30 @@
+name: "Format"
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ./.github/workflows/.node-version
+      - run: yarn install
+      - name: format check
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: EPMatt/reviewdog-action-prettier@v1
+        with:
+          reporter: github-pr-review
+          filter_mode: nofilter
+          fail_on_error: "true"
+      - name: format check
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          yarn prettier . --write
+          git diff --exit-code
