@@ -1,0 +1,15 @@
+{
+  "name": "devcotainer-systemd",
+  "version": "0.1.0",
+  "description": "systemd on Dev Containers",
+  "main": "index.js",
+  "repository": "https://github.com/yutotnh/devcotainer-systemd.git",
+  "author": "yutotnh <57719497+yutotnh@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5"
+  }
+}
