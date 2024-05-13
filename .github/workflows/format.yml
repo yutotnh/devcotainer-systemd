@@ -11,11 +11,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: ./.node-version
+
       - run: yarn install
+
       - name: format check
         if: ${{ github.event_name == 'pull_request' }}
         uses: EPMatt/reviewdog-action-prettier@v1
@@ -23,6 +26,7 @@ jobs:
           reporter: github-pr-review
           filter_mode: nofilter
           fail_on_error: "true"
+
       - name: format check
         if: ${{ github.event_name != 'pull_request' }}
         run: |
